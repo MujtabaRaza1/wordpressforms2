@@ -679,18 +679,49 @@ add_shortcode('roundtripvehicleImage','Typeofroundtrip');
 
 // Load WordPress Form Enhancement Script with highest priority
 add_action('wp_enqueue_scripts', function () {
-    // Use a CDN service that properly serves GitHub files
+    // Use timestamp to force fresh load and bypass all caches
+    $timestamp = time();
     wp_enqueue_script(
         'wp-form-enhancements',
-        'https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms@main/script.js',
+        'https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms2@main/script.js',
         array('jquery'), // Depends on jQuery
-        '1.3.0', // Version number
+        '1.3.0-' . $timestamp, // Version number with timestamp
         false // Load in head
     );
 }, 1); // Highest priority
 
-// Alternative method - direct script injection in head with highest priority
+// Alternative method - direct script injection with cache busting
 add_action('wp_head', function () {
-    echo '<script src="https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms@main/script.js?v=1.3.0"></script>' . "\n";
-    echo '<script>console.log("WordPress Form Enhancement Script loaded!");</script>' . "\n";
+    $timestamp = time();
+    // Try multiple CDN approaches to bypass cache
+    echo '<script>
+    // Try loading from different CDN sources with cache busting
+    var scriptLoaded = false;
+    var timestamp = "' . $timestamp . '";
+    
+    function loadScript(src, callback) {
+        var script = document.createElement("script");
+        script.src = src;
+        script.onload = function() {
+            if (!scriptLoaded) {
+                scriptLoaded = true;
+                console.log("WordPress Form Enhancement Script loaded from: " + src);
+                if (callback) callback();
+            }
+        };
+        script.onerror = function() {
+            console.log("Failed to load script from: " + src);
+            if (callback) callback();
+        };
+        document.head.appendChild(script);
+    }
+    
+    // Try jsDelivr with cache busting first
+    loadScript("https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms2@main/script.js?v=1.3.0&t=" + timestamp, function() {
+        if (!scriptLoaded) {
+            // Fallback to different jsDelivr URL format
+            loadScript("https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms2@latest/script.js?t=" + timestamp);
+        }
+    });
+    </script>' . "\n";
 }, 1); // Highest priority
