@@ -684,13 +684,13 @@ add_action('wp_enqueue_scripts', function () {
         'wp-form-enhancements',
         'https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms@main/script.js',
         array('jquery'), // Depends on jQuery
-        '1.2.0', // Version number
+        '1.3.0', // Version number
         false // Load in head
     );
 }, 1); // Highest priority
 
 // Alternative method - direct script injection in head with highest priority
 add_action('wp_head', function () {
-    echo '<script src="https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms@main/script.js?v=1.2.0"></script>' . "\n";
+    echo '<script src="https://cdn.jsdelivr.net/gh/MujtabaRaza1/wordpressforms@main/script.js?v=1.3.0"></script>' . "\n";
     echo '<script>console.log("WordPress Form Enhancement Script loaded!");</script>' . "\n";
 }, 1); // Highest priority
