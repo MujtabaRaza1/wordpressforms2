@@ -118,9 +118,9 @@
             suitcases: 10,
             image: 'https://www.royalcarriages.com/wp-content/uploads/2025/08/20-passenger-limo-bus-11.jpg'
         },
-        'Mini Bus (25 passengers)': {
-            passengers: 25,
-            suitcases: 25,
+        'Mini Bus (25 - 30 passengers)': {
+            passengers: 30,
+            suitcases: 30,
             image: 'https://www.royalcarriages.com/wp-content/uploads/2025/08/shuttle-buses-12.jpg'
         },
         'Limo Bus (30 passengers)': {
@@ -136,7 +136,7 @@
         'Luxury Executive Shuttle Bus (40 passengers)': {
             passengers: 40,
             suitcases: 40,
-            image: 'https://www.royalcarriages.com/wp-content/uploads/2025/08/Executive-Shuttle-Bus-40-Pass.png'
+            image: 'https://www.royalcarriages.com/wp-content/uploads/2023/12/exe-bus.jpg'
         },
         'Charter Bus / Motor Coach (55 passengers)': {
             passengers: 55,
